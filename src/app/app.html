@@ -1,0 +1,207 @@
+<main class="layout">
+  <header class="topbar">
+    <div>
+      <h1>SSTC - Soporte Tecnico</h1>
+      <p>Sistema de incidencias, tecnicos, repuestos e historial de equipos.</p>
+    </div>
+    <button type="button" (click)="cargarTodo()">Actualizar</button>
+  </header>
+
+  @if (mensaje) {
+    <div class="alert ok">{{ mensaje }}</div>
+  }
+  @if (error) {
+    <div class="alert error">{{ error }}</div>
+  }
+
+  <section class="summary">
+    <div>
+      <span>Pendientes</span>
+      <strong>{{ monitoreo?.incidenciasPendientes || 0 }}</strong>
+    </div>
+    <div>
+      <span>Solucionadas</span>
+      <strong>{{ monitoreo?.incidenciasSolucionadas || 0 }}</strong>
+    </div>
+    <div>
+      <span>Tecnicos</span>
+      <strong>{{ tecnicos.length }}</strong>
+    </div>
+  </section>
+
+  <section class="grid">
+    <article class="panel">
+      <h2>Registrar incidencia</h2>
+      <label>Equipo
+        <select [(ngModel)]="nuevaIncidencia.codigoEquipo">
+          @for (equipo of equipos; track equipo.id) {
+            <option [value]="equipo.codigo">{{ equipo.codigo }} - {{ equipo.responsable.nombre }}</option>
+          }
+        </select>
+      </label>
+      <label>Canal
+        <select [(ngModel)]="nuevaIncidencia.canalRegistro">
+          <option value="TELEFONO">Telefono</option>
+          <option value="EMAIL">Email</option>
+        </select>
+      </label>
+      <label>Registrado por
+        <select [(ngModel)]="nuevaIncidencia.registradoPorId">
+          @for (miembro of miembros; track miembro.id) {
+            <option [value]="miembro.id">{{ miembro.nombre }} - {{ miembro.rol }}</option>
+          }
+        </select>
+      </label>
+      <label>Problema
+        <textarea [(ngModel)]="nuevaIncidencia.problema"></textarea>
+      </label>
+      <label>Diagnostico inicial
+        <textarea [(ngModel)]="nuevaIncidencia.diagnosticoInicial"></textarea>
+      </label>
+      <button type="button" (click)="registrarIncidencia()">Registrar</button>
+    </article>
+
+    <article class="panel">
+      <h2>Asignar tecnico</h2>
+      <label>Incidencia
+        <select [(ngModel)]="asignacion.incidenciaId">
+          @for (incidencia of incidencias; track incidencia.id) {
+            <option [value]="incidencia.id">#{{ incidencia.id }} - {{ incidencia.equipo.codigo }}</option>
+          }
+        </select>
+      </label>
+      <label>Tecnico
+        <select [(ngModel)]="asignacion.tecnicoId">
+          @for (tecnico of tecnicos; track tecnico.id) {
+            <option [value]="tecnico.id">{{ tecnico.nombre }} - {{ tecnico.disponible ? 'Disponible' : 'Sin cupo' }}</option>
+          }
+        </select>
+      </label>
+      <button type="button" (click)="asignarIncidencia()">Asignar</button>
+
+      <h3>Tareas por tecnico</h3>
+      <label>Tecnico
+        <select [(ngModel)]="tecnicoTareasId">
+          @for (tecnico of tecnicos; track tecnico.id) {
+            <option [value]="tecnico.id">{{ tecnico.nombre }}</option>
+          }
+        </select>
+      </label>
+      <button type="button" (click)="consultarTareas()">Consultar tareas</button>
+      <ul>
+        @for (tarea of tareas; track tarea.id) {
+          <li>#{{ tarea.id }} {{ tarea.equipo.codigo }} - {{ tarea.estado }}</li>
+        }
+      </ul>
+    </article>
+
+    <article class="panel">
+      <h2>Repuestos e informe</h2>
+      <label>Incidencia
+        <select [(ngModel)]="repuesto.incidenciaId">
+          @for (incidencia of incidencias; track incidencia.id) {
+            <option [value]="incidencia.id">#{{ incidencia.id }} - {{ incidencia.equipo.codigo }}</option>
+          }
+        </select>
+      </label>
+      <label>Repuesto
+        <input [(ngModel)]="repuesto.repuesto">
+      </label>
+      <label>Cantidad
+        <input type="number" min="1" [(ngModel)]="repuesto.cantidad">
+      </label>
+      <button type="button" (click)="solicitarRepuesto()">Solicitar repuesto</button>
+
+      <h3>Registrar solucion</h3>
+      <label>Incidencia
+        <select [(ngModel)]="informe.incidenciaId">
+          @for (incidencia of incidencias; track incidencia.id) {
+            <option [value]="incidencia.id">#{{ incidencia.id }} - {{ incidencia.equipo.codigo }}</option>
+          }
+        </select>
+      </label>
+      <label>Descripcion de solucion
+        <textarea [(ngModel)]="informe.descripcionSolucion"></textarea>
+      </label>
+      <label class="check">
+        <input type="checkbox" [(ngModel)]="informe.requirioRepuesto">
+        Requirio repuesto
+      </label>
+      <button type="button" (click)="registrarInforme()">Cerrar incidencia</button>
+    </article>
+
+    <article class="panel">
+      <h2>Diccionario de fallas</h2>
+      <label>Titulo
+        <input [(ngModel)]="nuevaFalla.titulo">
+      </label>
+      <label>Sintomas
+        <textarea [(ngModel)]="nuevaFalla.sintomas"></textarea>
+      </label>
+      <label>Solucion recomendada
+        <textarea [(ngModel)]="nuevaFalla.solucionRecomendada"></textarea>
+      </label>
+      <label>Categoria
+        <input [(ngModel)]="nuevaFalla.categoria">
+      </label>
+      <button type="button" (click)="registrarFalla()">Guardar falla</button>
+    </article>
+  </section>
+
+  <section class="wide">
+    <article class="panel">
+      <h2>Incidencias</h2>
+      <div class="table">
+        <div class="row head">
+          <span>ID</span><span>Equipo</span><span>Usuario</span><span>Tecnico</span><span>Estado</span><span>Problema</span>
+        </div>
+        @for (incidencia of incidencias; track incidencia.id) {
+          <div class="row">
+            <span>#{{ incidencia.id }}</span>
+            <span>{{ incidencia.equipo.codigo }}</span>
+            <span>{{ incidencia.equipo.responsable.nombre }}</span>
+            <span>{{ incidencia.tecnicoAsignado?.nombre || 'Sin asignar' }}</span>
+            <span class="badge" [class.done]="incidencia.estado === 'SOLUCIONADO'">{{ incidencia.estado }}</span>
+            <span>{{ incidencia.problema }}</span>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>Historial de equipo</h2>
+      <div class="inline">
+        <input [(ngModel)]="codigoHistorial" placeholder="PC-001">
+        <button type="button" (click)="consultarHistorial()">Consultar</button>
+      </div>
+      <ul>
+        @for (item of historial; track item.id) {
+          <li>#{{ item.id }} {{ item.fechaRegistro }} - {{ item.estado }} - {{ item.problema }}</li>
+        }
+      </ul>
+    </article>
+
+    <article class="panel">
+      <h2>Productividad</h2>
+      <div class="cards">
+        @for (tecnico of monitoreo?.productividadTecnicos || []; track tecnico.tecnicoId) {
+          <div class="mini">
+            <strong>{{ tecnico.tecnico }}</strong>
+            <span>Pendientes: {{ tecnico.pendientes }}</span>
+            <span>Atendidas hoy: {{ tecnico.atendidasHoy }}</span>
+            <span>{{ tecnico.disponible ? 'Disponible' : 'Sin disponibilidad' }}</span>
+          </div>
+        }
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>Fallas registradas</h2>
+      <ul>
+        @for (falla of fallas; track falla.id) {
+          <li><strong>{{ falla.titulo }}</strong>: {{ falla.solucionRecomendada }}</li>
+        }
+      </ul>
+    </article>
+  </section>
+</main>
