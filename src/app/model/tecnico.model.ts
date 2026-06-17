@@ -4,4 +4,5 @@ export interface Tecnico {
   limiteAtencion: number;
   incidenciasPendientes: number;
   disponible: boolean;
+  activo: boolean;
 }

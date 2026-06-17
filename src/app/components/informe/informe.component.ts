@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -17,6 +17,7 @@ export class InformeComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly incidenciaService = inject(IncidenciaService);
   private readonly fallaService = inject(FallaService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   incidenciaId!: number;
   incidencia?: Incidencia;
@@ -46,6 +47,7 @@ export class InformeComponent implements OnInit {
         if (!this.incidencia) {
           this.error = 'No se encontró la incidencia.';
         }
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar incidencia:', err)
     });

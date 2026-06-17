@@ -46,7 +46,7 @@
       <span class="text-sm font-medium text-gray-500">Técnicos disponibles</span>
       <i class="fas fa-user-check text-emerald-500 bg-emerald-50 p-2 rounded-lg"></i>
     </div>
-    <p class="text-3xl font-bold text-gray-900">{{ getDisponibleCount() }}/{{ tecnicos.length || 5 }}</p>
+    <p class="text-3xl font-bold text-gray-900">{{ getDisponibleCount() }}/{{ getActiveCount() || 5 }}</p>
     <span class="text-xs text-red-500">Carga regulada</span>
   </div>
   <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
@@ -86,7 +86,9 @@
         <div>
           <h4 class="font-bold text-gray-900 text-sm">{{ tecnico.nombre }}</h4>
           <p class="text-xs text-blue-700 font-medium">Técnico de Soporte</p>
-          @if (tecnico.disponible) {
+          @if (!tecnico.activo) {
+            <span class="inline-block mt-1.5 text-xs font-semibold bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Inactivo</span>
+          } @else if (tecnico.disponible) {
             <span class="inline-block mt-1.5 text-xs font-semibold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Disponible</span>
           } @else {
             <span class="inline-block mt-1.5 text-xs font-semibold bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Al límite ({{ tecnico.incidenciasPendientes }}/{{ tecnico.limiteAtencion }})</span>

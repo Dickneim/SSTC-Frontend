@@ -31,6 +31,9 @@ export class DisponibilidadComponent implements OnInit {
   }
 
   getStatusClass(tecnico: Tecnico): string {
+    if (!tecnico.activo) {
+      return 'text-gray-500 bg-gray-100';
+    }
     const ratio = tecnico.incidenciasPendientes / tecnico.limiteAtencion;
     if (tecnico.incidenciasPendientes >= tecnico.limiteAtencion) {
       return 'text-red-700 bg-red-100';
@@ -42,6 +45,9 @@ export class DisponibilidadComponent implements OnInit {
   }
 
   getStatusLabel(tecnico: Tecnico): string {
+    if (!tecnico.activo) {
+      return 'Inactivo';
+    }
     const ratio = tecnico.incidenciasPendientes / tecnico.limiteAtencion;
     if (tecnico.incidenciasPendientes >= tecnico.limiteAtencion) {
       return 'Al límite';
@@ -53,6 +59,9 @@ export class DisponibilidadComponent implements OnInit {
   }
 
   getFillColorClass(tecnico: Tecnico): string {
+    if (!tecnico.activo) {
+      return 'bg-gray-300';
+    }
     const ratio = tecnico.incidenciasPendientes / tecnico.limiteAtencion;
     if (tecnico.incidenciasPendientes >= tecnico.limiteAtencion) {
       return 'bg-red-500';
