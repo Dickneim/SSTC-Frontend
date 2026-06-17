@@ -1,0 +1,115 @@
+<!-- Encabezado del Dashboard -->
+<div class="mb-10">
+  <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Monitoreo de Área de Soporte</h1>
+  <p class="text-gray-500 text-lg mt-1">Panel de control gerencial y operativo.</p>
+</div>
+
+<!-- Indicadores de Productividad y Problemas Críticos -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+  
+  <!-- Equipos Reparados Diariamente -->
+  <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Reparados Hoy</span>
+      <i class="fas fa-tools text-emerald-500 bg-emerald-50 p-2 rounded-lg"></i>
+    </div>
+    <p class="text-3xl font-black text-gray-900">{{ monitoreo?.incidenciasSolucionadas ?? 0 }}</p>
+    <p class="text-[10px] text-emerald-600 font-bold mt-2">Conteo diario de reparaciones técnicas</p>
+  </div>
+
+  <!-- Fallas Complicadas -->
+  <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Fallas Pendientes</span>
+      <i class="fas fa-exclamation-triangle text-amber-500 bg-amber-50 p-2 rounded-lg"></i>
+    </div>
+    <p class="text-3xl font-black text-gray-900">{{ monitoreo?.incidenciasPendientes ?? 0 }}</p>
+    <p class="text-[10px] text-amber-600 font-bold mt-2">Equipos bajo monitoreo especial</p>
+  </div>
+
+  <!-- Técnicos Saturados -->
+  <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Técnicos Saturados</span>
+      <i class="fas fa-user-clock text-red-500 bg-red-50 p-2 rounded-lg"></i>
+    </div>
+    <p class="text-3xl font-black text-gray-900">{{ getSaturadosCount() }}</p>
+    <p class="text-[10px] text-red-600 font-bold mt-2">Personal al límite de atención</p>
+  </div>
+
+  <!-- SLA -->
+  <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
+    <div class="flex items-center justify-between mb-4">
+      <span class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">SLA Cumplimiento</span>
+      <i class="fas fa-bolt text-blue-500 bg-blue-50 p-2 rounded-lg"></i>
+    </div>
+    <p class="text-3xl font-black text-gray-900">92%</p>
+    <p class="text-[10px] text-blue-600 font-bold mt-2">Efectividad de resolución semanal</p>
+  </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  
+  <!-- Detalle de Equipos Complicados (Consulta Jefe de Área) -->
+  <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+    <h2 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+      <i class="fas fa-search-plus text-blue-700"></i> Seguimiento de Incidencias Activas
+    </h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="text-gray-400 font-bold uppercase text-[10px] tracking-widest border-b border-gray-50">
+          <tr>
+            <th class="pb-3">Equipo / Usuario</th>
+            <th class="pb-3">Estado de Falla</th>
+            <th class="pb-3 text-right">Técnico</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-50">
+          @for (inc of incidenciasComplicadas; track inc.id) {
+            <tr class="hover:bg-gray-50">
+              <td class="py-4 font-bold text-gray-900">
+                {{ inc.equipo.codigo }}<br>
+                <span class="text-[10px] text-gray-400 font-normal">{{ inc.equipo.responsable.nombre }}</span>
+              </td>
+              <td class="py-4 text-amber-600 italic">{{ inc.problema }}</td>
+              <td class="py-4 text-right font-mono text-gray-500">
+                {{ inc.tecnicoAsignado?.nombre ?? 'Sin Asignar' }}
+              </td>
+            </tr>
+          }
+          @if (incidenciasComplicadas.length === 0) {
+            <tr>
+              <td colspan="3" class="text-center py-4 text-gray-400">No hay incidencias activas.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Rendimiento Diario por Técnico -->
+  <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
+    <h2 class="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
+      <i class="fas fa-chart-bar text-blue-700"></i> Rendimiento Diario por Técnico
+    </h2>
+    <div class="space-y-6">
+      @for (tecnico of monitoreo?.productividadTecnicos || []; track tecnico.tecnicoId) {
+        <div>
+          <div class="flex justify-between text-sm mb-2">
+            <span class="font-bold">{{ tecnico.tecnico }}</span>
+            <span class="text-emerald-600 font-bold">{{ tecnico.atendidasHoy }} equipos</span>
+          </div>
+          <div class="w-full bg-gray-100 rounded-full h-2">
+            <div class="bg-emerald-500 h-2 rounded-full transition-all duration-500" 
+              [style.width.%]="(tecnico.atendidasHoy / 5) * 100">
+            </div>
+          </div>
+        </div>
+      }
+      @if ((monitoreo?.productividadTecnicos || []).length === 0) {
+        <div class="text-center text-gray-400 py-4">No hay datos de productividad disponibles.</div>
+      }
+    </div>
+  </div>
+
+</div>

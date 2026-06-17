@@ -1,0 +1,95 @@
+<!-- Botón Volver -->
+<div class="max-w-5xl mx-auto mb-6">
+  <button routerLink="/tareas" class="flex items-center gap-2 text-sm font-semibold text-gray-500 hover:text-blue-700 transition">
+    <i class="fas fa-arrow-left text-xs"></i> Volver a Mis Tareas
+  </button>
+</div>    
+
+<!-- Sección de Búsqueda -->
+<div class="mb-10 text-center max-w-2xl mx-auto">
+  <h1 class="text-3xl font-extrabold text-gray-900 mb-4">Diccionario de Fallas</h1>
+  <p class="text-gray-500 mb-8">Consulta soluciones probadas o registra nuevos conocimientos técnicos.</p>
+  <div class="relative group">
+    <i class="fas fa-search absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 transition group-focus-within:text-blue-700"></i>
+    <input type="text" [(ngModel)]="searchText" placeholder="Buscar por problema (ej. pantalla azul, impresora, red)..." 
+      class="w-full pl-14 pr-6 py-4 bg-white border border-gray-200 rounded-full shadow-sm outline-none focus:ring-2 focus:ring-blue-700 focus:border-transparent transition-all">
+  </div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+  <!-- Lado Izquierdo: Lista de Conocimientos -->
+  <div class="lg:col-span-2 space-y-4">
+    <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2 mb-4">
+      <i class="fas fa-book text-blue-700"></i> Soluciones Encontradas
+    </h2>
+    
+    @for (falla of filteredFallas; track falla.id) {
+      <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:border-blue-200 transition">
+        <div class="flex justify-between items-start mb-3">
+          <span class="text-xs font-bold text-blue-700 uppercase bg-blue-50 px-3 py-1 rounded-full">
+            {{ falla.categoria }}
+          </span>
+          <span class="text-[10px] text-gray-400 font-mono">ID: DF-{{ falla.id }}</span>
+        </div>
+        <h3 class="font-bold text-gray-900 mb-2 italic">"{{ falla.titulo }}"</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">
+          <strong>Solución:</strong> {{ falla.solucionRecomendada }}
+        </p>
+      </div>
+    }
+    @if (filteredFallas.length === 0) {
+      <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm text-center text-gray-400">
+        No se encontraron fallas con los criterios de búsqueda.
+      </div>
+    }
+  </div>
+
+  <!-- Lado Derecho: Formulario de Registro -->
+  <div class="lg:col-span-1">
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm sticky top-24">
+      <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <i class="fas fa-plus-circle text-blue-700"></i> Nuevo Registro
+      </h2>
+      
+      @if (mensaje) {
+        <div class="mb-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl p-4 flex items-center gap-2 text-sm">
+          <i class="fas fa-check-circle"></i>
+          <span>{{ mensaje }}</span>
+        </div>
+      }
+      
+      @if (error) {
+        <div class="mb-4 bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 flex items-center gap-2 text-sm">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>{{ error }}</span>
+        </div>
+      }
+      
+      <form (submit)="registrarFalla()" class="space-y-5">
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">Categoría *</label>
+          <select [(ngModel)]="nuevaFalla.categoria" name="categoria" required 
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition">
+            <option value="">Seleccione...</option>
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Redes">Redes / Conectividad</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">Descripción del Fallo *</label>
+          <input type="text" [(ngModel)]="nuevaFalla.titulo" name="titulo" required placeholder="Ej. El equipo se apaga solo" 
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-gray-700 mb-2">Solución Sugerida *</label>
+          <textarea rows="4" [(ngModel)]="nuevaFalla.solucionRecomendada" name="solucionRecomendada" required placeholder="Detalle los pasos para la solución..." 
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 rounded-full shadow-lg shadow-blue-700/20 transition-all flex items-center justify-center gap-2">
+          <i class="fas fa-save"></i> Guardar en Diccionario
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

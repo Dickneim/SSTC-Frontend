@@ -1,0 +1,6 @@
+/* Global shell styles */
+body {
+  display: flex;
+  flex-direction: column;
+  min-h-screen: 100vh;
+}

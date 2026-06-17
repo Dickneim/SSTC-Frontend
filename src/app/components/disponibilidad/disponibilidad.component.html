@@ -1,0 +1,45 @@
+<div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+    <i class="fas fa-user-clock text-blue-700"></i> Disponibilidad de Técnicos
+  </h2>
+  <p class="text-gray-500 text-sm mb-6">Límite máximo de atención: <strong>5 incidencias</strong> por técnico. Asignación equitativa según carga operativa real.</p>
+  
+  <div class="space-y-4">
+    @for (tecnico of tecnicos; track tecnico.id) {
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between bg-gray-50 rounded-2xl p-4 gap-3 border border-gray-100">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+            <i class="fas fa-user-cog text-gray-600"></i>
+          </div>
+          <div>
+            <strong class="text-gray-900">{{ tecnico.nombre }}</strong>
+            <p class="text-xs text-gray-500">Técnico de Soporte</p>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4 flex-wrap">
+          <span class="text-sm font-semibold text-gray-700">
+            {{ tecnico.incidenciasPendientes }}/{{ tecnico.limiteAtencion }}
+          </span>
+          
+          <div class="w-28 bg-gray-200 h-2.5 rounded-full overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-300"
+              [ngClass]="getFillColorClass(tecnico)"
+              [style.width.%]="getLoadPercent(tecnico)">
+            </div>
+          </div>
+          
+          <span class="text-xs font-semibold px-3 py-1 rounded-full w-24 text-center"
+            [ngClass]="getStatusClass(tecnico)">
+            {{ getStatusLabel(tecnico) }}
+          </span>
+        </div>
+      </div>
+    }
+    @if (tecnicos.length === 0) {
+      <div class="text-center text-gray-500 py-8">
+        No hay técnicos registrados.
+      </div>
+    }
+  </div>
+</div>

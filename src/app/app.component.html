@@ -1,0 +1,94 @@
+<header class="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+          <i class="fas fa-laptop-medical text-white text-sm"></i>
+        </div>
+        <div>
+          <span class="font-bold text-gray-900 text-lg">Soft<span class="text-blue-700">Corp</span></span>
+          <span class="text-xs text-gray-500 ml-2 hidden sm:inline">| SSTC v1.0</span>
+        </div>
+      </div>
+      
+      <nav class="flex items-center gap-1 sm:gap-2 flex-wrap">
+        <button routerLink="/landing" routerLinkActive="bg-blue-50 text-blue-700" [routerLinkActiveOptions]="{exact: true}" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-home text-xs"></i> <span class="hidden sm:inline">Inicio</span>
+        </button>
+        <button routerLink="/registrar" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-plus-circle text-xs"></i> <span class="hidden sm:inline">Registrar</span>
+        </button>
+        <button routerLink="/asignar" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-user-check text-xs"></i> <span class="hidden sm:inline">Asignar</span>
+        </button>
+        <button routerLink="/disponibilidad" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-chart-bar text-xs"></i> <span class="hidden sm:inline">Disponibilidad</span>
+        </button>
+        <button routerLink="/tareas" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-list-check text-xs"></i> <span class="hidden sm:inline">Mis Tareas</span>
+        </button>
+        <button routerLink="/monitorear" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-chart-line text-xs"></i> <span class="hidden sm:inline">Monitoreo</span>
+        </button>
+        <button routerLink="/historial" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-history text-xs"></i> <span class="hidden sm:inline">Historial</span>
+        </button>
+        <button routerLink="/diccionario" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
+          <i class="fas fa-book text-xs"></i> <span class="hidden sm:inline">Diccionario</span>
+        </button>
+      </nav>
+      
+      <div class="hidden sm:flex items-center gap-3 ml-3">
+        <div class="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-semibold text-sm">JH</div>
+        <div class="text-xs text-gray-700">
+          <span class="font-semibold block">Jorge Huamán</span>
+          <span class="text-gray-400 text-[10px]">Jefe de Soporte</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow w-full">
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="bg-[#0f172a] text-gray-400 pt-14 pb-8 mt-auto w-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-700 pb-10 mb-6">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+            <i class="fas fa-laptop-medical text-white text-sm"></i>
+          </div>
+          <span class="font-bold text-white text-lg">Soft<span class="text-blue-500">Corp</span> SSTC</span>
+        </div>
+        <p class="text-sm leading-relaxed text-gray-400">
+          Garantizamos el funcionamiento continuo de tus equipos.<br>
+          Centralizamos y agilizamos el soporte técnico para que Soft<br>
+          Corporation nunca se detenga.
+        </p>
+      </div>
+      <div>
+        <h5 class="font-bold text-white mb-4">Navegación</h5>
+        <ul class="space-y-3 text-sm">
+          <li><a routerLink="/landing" class="hover:text-white transition">Inicio</a></li>
+          <li><a routerLink="/diccionario" class="hover:text-white transition">Diccionario de Fallas</a></li>
+          <li><a routerLink="/historial" class="hover:text-white transition">Historial de Equipos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5 class="font-bold text-white mb-4">Contacto</h5>
+        <ul class="space-y-3 text-sm">
+          <li class="flex gap-2 items-center"><i class="fas fa-map-marker-alt text-blue-500 w-4 text-center"></i> Soft Corporation, [Dirección]</li>
+          <li class="flex gap-2 items-center"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i> soporte.sstc@softcorp.com</li>
+          <li class="flex gap-2 items-center"><i class="fas fa-phone-alt text-blue-500 w-4 text-center"></i> Línea directa de soporte</li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
+      <p>Soft Corporation © 2026. Todos los derechos reservados.</p>
+      <p>Artefacto Vision v1.0 · ISO 9001 IT</p>
+    </div>
+  </div>
+</footer>
