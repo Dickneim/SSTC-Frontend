@@ -1,1 +1,129 @@
-/* You can add global styles to this file, and also import other style files */
+/* Custom styles for SSTC application to match Figma design */
+
+:root {
+  --primary-color: #1d4ed8;     /* blue-700 */
+  --primary-dark: #1e40af;      /* blue-800 */
+  --primary-darker: #1e3a8a;    /* blue-900 */
+  --primary-light: #eff6ff;     /* blue-50 */
+  --sky-light: #e0f2fe;         /* sky-100 */
+  --sky-border: #bae6fd;        /* sky-200 */
+  --success-color: #10b981;     /* emerald-500 */
+  --success-light: #ecfdf5;     /* emerald-50 */
+  --success-dark: #047857;      /* emerald-700 */
+  --warning-color: #f59e0b;     /* amber-500 */
+  --warning-light: #fffbeb;     /* amber-50 */
+  --warning-dark: #d97706;      /* amber-700 */
+  --danger-color: #ef4444;      /* red-500 */
+  --danger-light: #fef2f2;      /* red-50 */
+  --danger-dark: #b91c1c;       /* red-700 */
+}
+
+/* Custom premium card animations */
+.hover-card {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.hover-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Helper background/text classes mimicking figma styles */
+.bg-sky-light {
+  background-color: var(--sky-light);
+}
+.border-sky-light {
+  border-color: var(--sky-border) !important;
+}
+.text-primary-darker {
+  color: var(--primary-darker);
+}
+.text-primary-dark {
+  color: var(--primary-dark);
+}
+.text-primary-medium {
+  color: var(--primary-color);
+}
+.bg-primary-light {
+  background-color: var(--primary-light);
+}
+
+.bg-success-light {
+  background-color: var(--success-light);
+}
+.text-success-dark {
+  color: var(--success-dark);
+}
+.text-success-medium {
+  color: var(--success-color);
+}
+
+.bg-warning-light {
+  background-color: var(--warning-light);
+}
+.text-warning-dark {
+  color: var(--warning-dark);
+}
+.text-warning-medium {
+  color: var(--warning-color);
+}
+
+.bg-danger-light {
+  background-color: var(--danger-light);
+}
+.text-danger-dark {
+  color: var(--danger-dark);
+}
+.text-danger-medium {
+  color: var(--danger-color);
+}
+
+/* Custom border radius sizes */
+.rounded-3xl {
+  border-radius: 1.5rem !important;
+}
+.rounded-2xl {
+  border-radius: 1rem !important;
+}
+.rounded-xl {
+  border-radius: 0.75rem !important;
+}
+
+/* Overriding Bootstrap elements for a more premium look */
+body {
+  background-color: #f8fafc;
+  color: #334155;
+}
+
+.card {
+  border: 1px solid #f1f5f9;
+  border-radius: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  color: #475569;
+  font-weight: 600;
+  border-radius: 9999px;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-secondary:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #334155;
+}

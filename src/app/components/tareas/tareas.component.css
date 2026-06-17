@@ -1,0 +1,49 @@
+.kanban-col-pending {
+  background-color: #fffbeb; /* warning-light */
+  border: 1px solid #fef3c7; /* warning-light border */
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.kanban-col-solved {
+  background-color: #ecfdf5; /* success-light */
+  border: 1px solid #d1fae5; /* success-light border */
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+.task-card {
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.task-card.selected {
+  background-color: var(--primary-light) !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15) !important;
+}
+
+.form-select {
+  border-radius: 0.75rem !important;
+  padding: 0.5rem 2rem 0.5rem 1rem;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.form-select:focus {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15);
+  outline: none;
+}

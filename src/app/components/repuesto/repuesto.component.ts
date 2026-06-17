@@ -9,7 +9,8 @@ import { Incidencia } from '../../model/incidencia.model';
   selector: 'app-repuesto',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './repuesto.component.html'
+  templateUrl: './repuesto.component.html',
+  styleUrl: './repuesto.component.css'
 })
 export class RepuestoComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

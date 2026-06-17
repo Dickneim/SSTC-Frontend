@@ -1,98 +1,113 @@
 <!-- Hero Section -->
-<div class="bg-sky-100 rounded-3xl p-6 sm:p-10 lg:p-14 mb-10 shadow-sm border border-sky-200">
-  <div class="flex flex-col lg:flex-row items-center gap-8">
-    <div class="flex-1">
-      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight mb-4 text-blue-900">
-        Soporte Técnico <span class="text-blue-700">Inteligente</span>
+<div class="hero-section shadow-sm">
+  <div class="row align-items-center">
+    <div class="col-lg-9">
+      <h1 class="display-5 fw-extrabold mb-3 text-primary-darker">
+        Soporte Técnico <span class="text-primary-medium">Inteligente</span>
       </h1>
-      <p class="text-blue-800 text-base sm:text-lg mb-6 max-w-lg font-medium opacity-90">
+      <p class="text-primary-dark fs-5 mb-4 opacity-90" style="max-width: 32rem;">
         Centraliza incidencias, asigna con criterio de carga y resuelve más rápido con el diccionario de fallas integrado. Diseñado para Soft Corporation.
       </p>
-      <div class="flex flex-wrap gap-3">
-        <button routerLink="/registrar" class="bg-blue-700 hover:bg-blue-800 text-white font-semibold px-5 py-3 rounded-full transition shadow-md flex items-center gap-2">
+      <div class="d-flex flex-wrap gap-2">
+        <button routerLink="/registrar" class="btn btn-primary d-flex align-items-center gap-2 shadow-sm">
           <i class="fas fa-headset"></i> Nueva Incidencia
         </button>
-        <button routerLink="/asignar" class="bg-white hover:bg-gray-50 text-blue-700 font-semibold px-5 py-3 rounded-full transition border border-blue-200 flex items-center gap-2 shadow-sm">
+        <button routerLink="/asignar" class="btn btn-secondary border border-sky-light text-primary-medium d-flex align-items-center gap-2 shadow-sm">
           <i class="fas fa-people-arrows"></i> Gestionar Asignaciones
         </button>
       </div>
     </div>
-    <div class="flex-shrink-0 text-[8rem] sm:text-[10rem] opacity-20 text-blue-700">
-      <i class="fas fa-microchip"></i>
-    </div>
+  </div>
+  <div class="hero-icon-bg">
+    <i class="fas fa-microchip"></i>
   </div>
 </div>
 
 <!-- KPIs -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-    <div class="flex items-center justify-between mb-3">
-      <span class="text-sm font-medium text-gray-500">Equipos arreglados hoy</span>
-      <i class="fas fa-tools text-emerald-500 bg-emerald-50 p-2 rounded-lg"></i>
+<div class="row g-4 mb-4">
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="kpi-card shadow-sm">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="small font-medium text-muted">Equipos arreglados hoy</span>
+        <i class="fas fa-tools text-success-medium bg-success-light kpi-icon"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-1">{{ monitoreo?.incidenciasSolucionadas ?? 12 }}</h3>
+      <span class="small text-success-dark">+3 vs ayer</span>
     </div>
-    <p class="text-3xl font-bold text-gray-900">{{ monitoreo?.incidenciasSolucionadas ?? 12 }}</p>
-    <span class="text-xs text-emerald-600">+3 vs ayer</span>
   </div>
-  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-    <div class="flex items-center justify-between mb-3">
-      <span class="text-sm font-medium text-gray-500">Incidencias pendientes</span>
-      <i class="fas fa-clock text-amber-500 bg-amber-50 p-2 rounded-lg"></i>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="kpi-card shadow-sm">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="small font-medium text-muted">Incidencias pendientes</span>
+        <i class="fas fa-clock text-warning-medium bg-warning-light kpi-icon"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-1">{{ monitoreo?.incidenciasPendientes ?? 7 }}</h3>
+      <span class="small text-warning-dark">En espera de solución</span>
     </div>
-    <p class="text-3xl font-bold text-gray-900">{{ monitoreo?.incidenciasPendientes ?? 7 }}</p>
-    <span class="text-xs text-amber-600">En espera de solución</span>
   </div>
-  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-    <div class="flex items-center justify-between mb-3">
-      <span class="text-sm font-medium text-gray-500">Técnicos disponibles</span>
-      <i class="fas fa-user-check text-emerald-500 bg-emerald-50 p-2 rounded-lg"></i>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="kpi-card shadow-sm">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="small font-medium text-muted">Técnicos disponibles</span>
+        <i class="fas fa-user-check text-success-medium bg-success-light kpi-icon"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-1">{{ getDisponibleCount() }}/{{ getActiveCount() || 5 }}</h3>
+      <span class="small text-danger-dark">Carga regulada</span>
     </div>
-    <p class="text-3xl font-bold text-gray-900">{{ getDisponibleCount() }}/{{ getActiveCount() || 5 }}</p>
-    <span class="text-xs text-red-500">Carga regulada</span>
   </div>
-  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-    <div class="flex items-center justify-between mb-3">
-      <span class="text-sm font-medium text-gray-500">Tiempo prom. resolución</span>
-      <i class="fas fa-hourglass-half text-blue-500 bg-blue-50 p-2 rounded-lg"></i>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="kpi-card shadow-sm">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="small font-medium text-muted">Tiempo prom. resolución</span>
+        <i class="fas fa-hourglass-half text-primary-medium bg-primary-light kpi-icon"></i>
+      </div>
+      <h3 class="fw-bold text-dark mb-1">4.2h</h3>
+      <span class="small text-primary-medium">-15% esta semana</span>
     </div>
-    <p class="text-3xl font-bold text-gray-900">4.2h</p>
-    <span class="text-xs text-blue-600">-15% esta semana</span>
   </div>
 </div>
 
 <!-- Equipo -->
-<div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-gray-100">
-  <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-    <i class="fas fa-users text-blue-700"></i> Nuestro Equipo de Soporte y Sistemas
+<div class="card p-4 p-md-5 shadow-sm">
+  <h2 class="h4 fw-bold text-dark mb-4 d-flex align-items-center gap-3">
+    <i class="fas fa-users text-primary-medium"></i> Nuestro Equipo de Soporte y Sistemas
   </h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    <!-- Jefe de Área Estático o Dinámico -->
-    <div class="team-card bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center gap-4 transition cursor-default">
-      <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-        <i class="fas fa-user-tie text-blue-700 text-xl"></i>
-      </div>
-      <div>
-        <h4 class="font-bold text-gray-900 text-sm">Jorge Huamán</h4>
-        <p class="text-xs text-blue-700 font-medium">Jefe de Área de Soporte</p>
-        <span class="inline-block mt-1.5 text-xs font-semibold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Disponible</span>
+  <div class="row g-4">
+    <!-- Jefe de Área Estático -->
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="team-card d-flex align-items-center gap-3">
+        <div class="team-avatar bg-primary-light flex-shrink-0">
+          <i class="fas fa-user-tie text-primary-medium fs-4"></i>
+        </div>
+        <div>
+          <h6 class="fw-bold text-dark mb-0">Jorge Huamán</h6>
+          <p class="small text-primary-medium mb-1">Jefe de Área de Soporte</p>
+          <span class="badge bg-success-light text-success-dark rounded-pill">Disponible</span>
+        </div>
       </div>
     </div>
 
     <!-- Técnicos Dinámicos -->
     @for (tecnico of tecnicos; track tecnico.id) {
-      <div class="team-card bg-gray-50 border border-gray-200 rounded-2xl p-5 flex items-center gap-4 transition cursor-default">
-        <div class="w-14 h-14 bg-gray-200 rounded-full flex items-center justify-center flex-shrink-0">
-          <i class="fas fa-screwdriver-wrench text-gray-600 text-xl"></i>
-        </div>
-        <div>
-          <h4 class="font-bold text-gray-900 text-sm">{{ tecnico.nombre }}</h4>
-          <p class="text-xs text-blue-700 font-medium">Técnico de Soporte</p>
-          @if (!tecnico.activo) {
-            <span class="inline-block mt-1.5 text-xs font-semibold bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Inactivo</span>
-          } @else if (tecnico.disponible) {
-            <span class="inline-block mt-1.5 text-xs font-semibold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">Disponible</span>
-          } @else {
-            <span class="inline-block mt-1.5 text-xs font-semibold bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Al límite ({{ tecnico.incidenciasPendientes }}/{{ tecnico.limiteAtencion }})</span>
-          }
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="team-card d-flex align-items-center gap-3">
+          <div class="team-avatar bg-light flex-shrink-0">
+            <i class="fas fa-screwdriver-wrench text-secondary fs-4"></i>
+          </div>
+          <div>
+            <h6 class="fw-bold text-dark mb-0">{{ tecnico.nombre }}</h6>
+            <p class="small text-primary-medium mb-1">Técnico de Soporte</p>
+            @if (!tecnico.activo) {
+              <span class="badge bg-light text-secondary rounded-pill">Inactivo</span>
+            } @else if (tecnico.disponible) {
+              <span class="badge bg-success-light text-success-dark rounded-pill">Disponible</span>
+            } @else {
+              <span class="badge bg-danger-light text-danger-dark rounded-pill">Al límite ({{ tecnico.incidenciasPendientes }}/{{ tecnico.limiteAtencion }})</span>
+            }
+          </div>
         </div>
       </div>
     }

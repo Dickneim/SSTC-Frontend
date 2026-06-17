@@ -9,7 +9,8 @@ import { Incidencia } from '../../model/incidencia.model';
   selector: 'app-monitorear',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './monitorear.component.html'
+  templateUrl: './monitorear.component.html',
+  styleUrl: './monitorear.component.css'
 })
 export class MonitorearComponent implements OnInit {
   private readonly reportesService = inject(ReportesService);

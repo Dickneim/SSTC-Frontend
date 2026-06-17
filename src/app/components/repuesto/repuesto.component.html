@@ -1,38 +1,37 @@
-<div class="max-w-3xl mx-auto">
-  <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-    <div class="bg-blue-700 p-8 text-white">
-      <h1 class="text-2xl font-bold flex items-center gap-3">
+<div class="repuesto-container">
+  <div class="card border-0 shadow-sm rounded-3xl overflow-hidden">
+    <div class="header-panel">
+      <h1 class="h3 fw-bold mb-1 d-flex align-items-center gap-3">
         <i class="fas fa-box-open"></i> Solicitar Repuesto
       </h1>
-      <p class="text-blue-100 text-sm mt-2 opacity-90">Complete el formulario para la gestión logística de la incidencia activa.</p>
+      <p class="small mb-0 opacity-90">Complete el formulario para la gestión logística de la incidencia activa.</p>
     </div>
 
     @if (error) {
-      <div class="m-8 mb-0 bg-red-50 border border-red-200 text-red-800 rounded-xl p-4 text-sm text-center">
+      <div class="alert bg-danger-light border-0 text-danger-dark rounded-xl p-3 small m-4 mb-0 text-center" role="alert">
         {{ error }}
       </div>
     }
 
-    <form (submit)="enviarSolicitud()" class="p-8 space-y-6">
+    <form (submit)="enviarSolicitud()" class="p-4 p-md-5">
       
       <!-- Datos de Referencia -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
-        <div>
-          <label class="block text-xs font-bold text-gray-400 uppercase mb-2 tracking-widest">ID Incidencia</label>
-          <span class="text-gray-900 font-mono font-bold">INC-#{{ incidenciaId }}</span>
+      <div class="row g-3 bg-light p-4 rounded-2xl border mb-4">
+        <div class="col-12 col-sm-6">
+          <label class="small fw-bold text-muted text-uppercase mb-1 tracking-wider d-block">ID Incidencia</label>
+          <span class="text-dark font-monospace fw-bold">INC-#{{ incidenciaId }}</span>
         </div>
-        <div>
-          <label class="block text-xs font-bold text-gray-400 uppercase mb-2 tracking-widest">Equipo</label>
-          <span class="text-gray-900 font-medium">{{ incidencia?.equipo?.codigo }}</span>
+        <div class="col-12 col-sm-6">
+          <label class="small fw-bold text-muted text-uppercase mb-1 tracking-wider d-block">Equipo</label>
+          <span class="text-dark fw-semibold">{{ incidencia?.equipo?.codigo }}</span>
         </div>
       </div>
 
       <!-- Selección de Repuesto -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-        <div class="sm:col-span-2">
-          <label class="block text-sm font-bold text-gray-700 mb-2">Repuesto Requerido *</label>
-          <select [(ngModel)]="repuesto" name="repuesto" required 
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition">
+      <div class="row g-3 mb-3">
+        <div class="col-12 col-sm-8">
+          <label class="form-label">Repuesto Requerido *</label>
+          <select [(ngModel)]="repuesto" name="repuesto" required class="form-select">
             <option value="">Seleccione un repuesto...</option>
             <option value="Memoria RAM DDR4 8GB">Memoria RAM DDR4 8GB</option>
             <option value="Unidad SSD 480GB">Unidad SSD 480GB</option>
@@ -40,25 +39,23 @@
             <option value="Teclado Laptop Corporativo">Teclado Laptop Corporativo</option>
           </select>
         </div>
-        <div>
-          <label class="block text-sm font-bold text-gray-700 mb-2">Cantidad *</label>
-          <input type="number" min="1" [(ngModel)]="cantidad" name="cantidad" required 
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition">
+        <div class="col-12 col-sm-4">
+          <label class="form-label">Cantidad *</label>
+          <input type="number" min="1" [(ngModel)]="cantidad" name="cantidad" required class="form-control">
         </div>
       </div>
 
       <!-- Justificación Técnica -->
-      <div>
-        <label class="block text-sm font-bold text-gray-700 mb-2">Justificación Técnica</label>
-        <textarea rows="4" [(ngModel)]="justificacion" name="justificacion" placeholder="Explique la necesidad del repuesto según el diagnóstico realizado..." 
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:ring-2 focus:ring-blue-700 outline-none text-sm transition"></textarea>
+      <div class="mb-4">
+        <label class="form-label">Justificación Técnica</label>
+        <textarea rows="4" [(ngModel)]="justificacion" name="justificacion" placeholder="Explique la necesidad del repuesto según el diagnóstico realizado..." class="form-control"></textarea>
       </div>
 
-      <div class="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-50">
-        <button type="submit" class="flex-1 bg-blue-700 hover:bg-blue-800 text-white font-bold py-4 rounded-full shadow-lg transition flex items-center justify-center gap-2">
+      <div class="d-flex flex-column flex-sm-row gap-2 pt-4 border-top">
+        <button type="submit" class="btn btn-primary flex-grow-1 py-2.5 shadow-sm d-flex align-items-center justify-content-center gap-2">
           <i class="fas fa-paper-plane"></i> Enviar Solicitud
         </button>
-        <button type="button" routerLink="/tareas" class="px-8 py-4 bg-white border border-gray-200 text-gray-500 font-semibold rounded-full hover:bg-gray-50 transition">
+        <button type="button" routerLink="/tareas" class="btn btn-secondary px-4 py-2.5">
           Cancelar
         </button>
       </div>

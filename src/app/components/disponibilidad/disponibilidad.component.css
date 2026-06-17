@@ -1,0 +1,41 @@
+.disponibilidad-container {
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.tech-row {
+  background-color: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 1rem;
+  padding: 1rem;
+  transition: transform 0.2s;
+}
+
+.tech-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.progress {
+  width: 7rem;
+  height: 0.6rem;
+  border-radius: 9999px;
+  background-color: #e2e8f0;
+}
+
+/* Mapping Tailwind classes returned by typescript to CSS */
+.text-gray-500 { color: #64748b !important; }
+.bg-gray-100 { background-color: #f1f5f9 !important; }
+.bg-gray-300 { background-color: #cbd5e1 !important; }
+
+.text-red-700 { color: var(--danger-dark) !important; }
+.bg-red-100 { background-color: var(--danger-light) !important; }
+.bg-red-500 { background-color: var(--danger-color) !important; }
+
+.text-amber-700 { color: var(--warning-dark) !important; }
+.bg-amber-100 { background-color: var(--warning-light) !important; }
+.bg-amber-500 { background-color: var(--warning-color) !important; }
+
+.text-emerald-700 { color: var(--success-dark) !important; }
+.bg-emerald-100 { background-color: var(--success-light) !important; }
+.bg-emerald-500 { background-color: var(--success-color) !important; }

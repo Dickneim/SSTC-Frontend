@@ -1,0 +1,34 @@
+.form-container {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.form-label {
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+  border-radius: 0.75rem !important; /* rounded-xl */
+  padding: 0.75rem 1rem;
+  border: 1px solid #cbd5e1;
+  background-color: #f8fafc;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: #ffffff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15);
+  outline: none;
+}
+
+.form-control[readonly] {
+  background-color: #e2e8f0;
+  color: #64748b;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+}

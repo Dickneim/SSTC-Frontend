@@ -1,94 +1,92 @@
 <!-- Buscador de Historial -->
-<div class="max-w-3xl mx-auto mb-10 text-center">
-  <h1 class="text-3xl font-extrabold text-gray-900 mb-4 tracking-tight">Historial de Equipos</h1>
-  <p class="text-gray-500 mb-8">Rastrea el ciclo de vida y las intervenciones técnicas de cualquier activo.</p>
-  <div class="relative group">
-    <i class="fas fa-barcode absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"></i>
+<div class="search-container text-center">
+  <h1 class="display-6 fw-extrabold text-dark mb-2">Historial de Equipos</h1>
+  <p class="text-muted mb-4">Rastrea el ciclo de vida y las intervenciones técnicas de cualquier activo.</p>
+  <div class="search-input-group shadow-sm">
+    <i class="fas fa-barcode search-icon"></i>
     <input type="text" [(ngModel)]="codigoEquipo" (keyup.enter)="consultarHistorial()"
-      placeholder="Escanee o ingrese el código del equipo (ej. PC-001)..." 
-      class="w-full pl-14 pr-32 py-4 bg-white border border-gray-200 rounded-full shadow-sm outline-none focus:ring-2 focus:ring-blue-700 transition-all">
-    <button (click)="consultarHistorial()" 
-      class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-700 text-white px-6 py-2 rounded-full text-sm font-bold hover:bg-blue-800 transition">
+      placeholder="Escanee o ingrese el código del equipo (ej. PC-001)...">
+    <button (click)="consultarHistorial()" class="btn btn-primary">
       Consultar
     </button>
   </div>
 </div>
 
 @if (error) {
-  <div class="max-w-4xl mx-auto mb-6 bg-red-50 border border-red-200 text-red-800 rounded-2xl p-4 text-sm text-center">
+  <div class="alert bg-danger-light border-0 text-danger-dark rounded-xl p-3 small text-center mb-4 mx-auto" style="max-width: 56rem;">
     {{ error }}
   </div>
 }
 
 @if (mensaje) {
-  <div class="max-w-4xl mx-auto mb-6 bg-blue-50 border border-blue-200 text-blue-800 rounded-2xl p-4 text-sm text-center">
+  <div class="alert bg-primary-light border-0 text-primary-dark rounded-xl p-3 small text-center mb-4 mx-auto" style="max-width: 56rem;">
     {{ mensaje }}
   </div>
 }
 
 <!-- Resultados del Historial -->
-<div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="row g-4 mx-auto" style="max-width: 56rem;">
   
   <!-- Ficha del Equipo -->
-  <div class="md:col-span-1">
-    <div class="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm sticky top-24">
-      <div class="w-20 h-20 bg-blue-50 text-blue-700 rounded-2xl flex items-center justify-center mb-4 text-3xl border border-blue-100">
+  <div class="col-12 col-md-4">
+    <div class="card p-4 shadow-sm sticky-top" style="top: 2rem; z-index: 10;">
+      <div class="device-avatar mb-3">
         <i class="fas fa-laptop"></i>
       </div>
-      <h2 class="text-xl font-black text-gray-900 mb-1">{{ selectedEquipo?.codigo ?? codigoEquipo }}</h2>
-      <p class="text-xs font-bold text-blue-700 uppercase mb-4 tracking-widest">Activo de Red</p>
+      <h3 class="h5 fw-bold text-dark mb-1">{{ selectedEquipo?.codigo ?? codigoEquipo }}</h3>
+      <p class="small text-primary-medium fw-bold text-uppercase mb-3 tracking-wider">Activo de Red</p>
       
-      <div class="space-y-3 pt-4 border-t border-gray-50">
-        <div class="flex justify-between text-sm">
-          <span class="text-gray-400">Usuario:</span>
-          <span class="font-bold text-gray-700">{{ selectedEquipo?.responsable?.nombre ?? 'Desconocido' }}</span>
+      <div class="pt-3 border-t">
+        <div class="d-flex justify-content-between small mb-2">
+          <span class="text-muted">Usuario:</span>
+          <span class="fw-bold text-dark">{{ selectedEquipo?.responsable?.nombre ?? 'Desconocido' }}</span>
         </div>
-        <div class="flex justify-between text-sm">
-          <span class="text-gray-400">Estado:</span>
-          <span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">Activo</span>
+        <div class="d-flex justify-content-between small">
+          <span class="text-muted">Estado:</span>
+          <span class="badge bg-success-light text-success-dark rounded-pill">Activo</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Línea de Tiempo (Intervenciones) -->
-  <div class="md:col-span-2 space-y-6">
-    <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-      <i class="fas fa-stream text-blue-700"></i> Registro de Reparaciones
+  <div class="col-12 col-md-8">
+    <h3 class="h5 fw-bold text-dark mb-4 d-flex align-items-center gap-2">
+      <i class="fas fa-stream text-primary-medium"></i> Registro de Reparaciones
     </h3>
     
     @if (historial.length > 0) {
-      <div class="relative space-y-8 pl-10 border-l-2 border-gray-200 ml-4">
+      <div class="timeline">
         @for (item of historial; track item.id) {
-          <div class="relative bg-white p-6 rounded-3xl border border-gray-100 shadow-sm">
-            <!-- Circulo de linea de tiempo -->
-            <div class="absolute -left-[49px] top-6 w-5 h-5 bg-blue-700 rounded-full border-4 border-white shadow-sm"></div>
-            
-            <div class="flex justify-between items-start mb-2">
-              <span class="text-[10px] font-bold text-gray-400 uppercase">{{ item.fechaRegistro | date:'mediumDate' }}</span>
-              <span class="text-[10px] font-mono text-gray-400">Ticket: #{{ item.id }}</span>
-            </div>
-            
-            <h4 class="font-bold text-gray-900 mb-2">{{ item.problema }}</h4>
-            
-            <p class="text-sm text-gray-600 leading-relaxed mb-4">
-              Estado del ticket: 
-              <span class="font-semibold" 
-                [ngClass]="item.estado === 'SOLUCIONADO' ? 'text-emerald-600' : 'text-amber-600'">
-                {{ item.estado }}
-              </span>
-            </p>
-            
-            @if (item.tecnicoAsignado) {
-              <div class="flex items-center gap-2 text-[10px] font-bold text-blue-700">
-                <i class="fas fa-user-cog"></i> Técnico: {{ item.tecnicoAsignado.nombre }}
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="card p-4 shadow-sm">
+              <div class="d-flex justify-content-between mb-2">
+                <span class="small text-muted font-monospace text-uppercase">{{ item.fechaRegistro | date:'mediumDate' }}</span>
+                <span class="small text-muted font-monospace">Ticket: #{{ item.id }}</span>
               </div>
-            }
+              
+              <h5 class="fw-bold text-dark mb-2 fs-6">{{ item.problema }}</h5>
+              
+              <p class="small text-muted mb-3">
+                Estado del ticket: 
+                <span class="fw-semibold" 
+                  [ngClass]="item.estado === 'SOLUCIONADO' ? 'text-success-dark' : 'text-warning-dark'">
+                  {{ item.estado }}
+                </span>
+              </p>
+              
+              @if (item.tecnicoAsignado) {
+                <div class="d-flex align-items-center gap-2 small text-primary-medium fw-semibold">
+                  <i class="fas fa-user-cog"></i> Técnico: {{ item.tecnicoAsignado.nombre }}
+                </div>
+              }
+            </div>
           </div>
         }
       </div>
     } @else {
-      <div class="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm text-center text-gray-500">
+      <div class="card p-4 shadow-sm text-center text-muted">
         No se registran intervenciones para este equipo.
       </div>
     }

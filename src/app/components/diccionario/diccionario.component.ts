@@ -8,7 +8,8 @@ import { Falla } from '../../model/falla.model';
   selector: 'app-diccionario',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './diccionario.component.html'
+  templateUrl: './diccionario.component.html',
+  styleUrl: './diccionario.component.css'
 })
 export class DiccionarioComponent implements OnInit {
   private readonly fallaService = inject(FallaService);

@@ -10,7 +10,8 @@ import { Tecnico } from '../../model/tecnico.model';
   selector: 'app-asignar',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './asignar.component.html'
+  templateUrl: './asignar.component.html',
+  styleUrl: './asignar.component.css'
 })
 export class AsignarComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);

@@ -10,7 +10,8 @@ import { Tecnico } from '../../model/tecnico.model';
   selector: 'app-landing',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './landing.component.html'
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.css'
 })
 export class LandingComponent implements OnInit {
   private readonly reportesService = inject(ReportesService);

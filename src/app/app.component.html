@@ -1,94 +1,92 @@
-<header class="bg-white/95 backdrop-blur-md border border-gray-200 shadow-md sticky top-4 z-50 mx-4 sm:mx-6 lg:mx-8 lg:max-w-7xl lg:mx-auto rounded-2xl transition-all duration-300">
-  <div class="px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-wrap lg:flex-nowrap justify-between items-center min-h-[4.5rem] py-3 lg:py-0 gap-4 lg:gap-3">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
-          <i class="fas fa-laptop-medical text-white text-sm"></i>
-        </div>
-        <div>
-          <span class="font-bold text-gray-900 text-lg">Soft<span class="text-blue-700">Corp</span></span>
-          <span class="text-xs text-gray-500 ml-2 hidden sm:inline">| SSTC v1.0</span>
-        </div>
+<header class="container custom-header sticky-top p-3 mb-4">
+  <div class="d-flex flex-wrap flex-lg-nowrap justify-content-between align-items-center gap-3">
+    <div class="d-flex align-items-center gap-3">
+      <div class="bg-primary text-white rounded p-2 d-flex align-items-center justify-content-center" style="width: 2.25rem; height: 2.25rem; flex-shrink: 0;">
+        <i class="fas fa-laptop-medical fs-6"></i>
       </div>
-      
-      <nav class="flex items-center gap-1 sm:gap-2 flex-wrap">
-        <button routerLink="/landing" routerLinkActive="bg-blue-50 text-blue-700" [routerLinkActiveOptions]="{exact: true}" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-home text-xs"></i> <span class="hidden sm:inline">Inicio</span>
-        </button>
-        <button routerLink="/registrar" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-plus-circle text-xs"></i> <span class="hidden sm:inline">Registrar</span>
-        </button>
-        <button routerLink="/asignar" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-user-check text-xs"></i> <span class="hidden sm:inline">Asignar</span>
-        </button>
-        <button routerLink="/disponibilidad" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-chart-bar text-xs"></i> <span class="hidden sm:inline">Disponibilidad</span>
-        </button>
-        <button routerLink="/tareas" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-list-check text-xs"></i> <span class="hidden sm:inline">Mis Tareas</span>
-        </button>
-        <button routerLink="/monitorear" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-chart-line text-xs"></i> <span class="hidden sm:inline">Monitoreo</span>
-        </button>
-        <button routerLink="/historial" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-history text-xs"></i> <span class="hidden sm:inline">Historial</span>
-        </button>
-        <button routerLink="/diccionario" routerLinkActive="bg-blue-50 text-blue-700" class="nav-btn flex items-center gap-2 px-3 py-2 rounded-full text-sm font-medium transition text-gray-600 hover:bg-gray-100">
-          <i class="fas fa-book text-xs"></i> <span class="hidden sm:inline">Diccionario</span>
-        </button>
-      </nav>
-      
-      <div class="hidden sm:flex items-center gap-3 ml-3">
-        <div class="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-semibold text-sm">JH</div>
-        <div class="text-xs text-gray-700">
-          <span class="font-semibold block">Jorge Huamán</span>
-          <span class="text-gray-400 text-[10px]">Jefe de Soporte</span>
-        </div>
+      <div>
+        <span class="fw-bold text-dark fs-5">Soft<span class="text-primary-medium">Corp</span></span>
+        <span class="text-muted small ms-2 d-none d-sm-inline">| SSTC v1.0</span>
+      </div>
+    </div>
+    
+    <nav class="d-flex align-items-center gap-1 flex-wrap">
+      <button routerLink="/landing" routerLinkActive="nav-btn-active" [routerLinkActiveOptions]="{exact: true}" class="nav-btn">
+        <i class="fas fa-home text-xs"></i> <span class="d-none d-sm-inline">Inicio</span>
+      </button>
+      <button routerLink="/registrar" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-plus-circle text-xs"></i> <span class="d-none d-sm-inline">Registrar</span>
+      </button>
+      <button routerLink="/asignar" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-user-check text-xs"></i> <span class="d-none d-sm-inline">Asignar</span>
+      </button>
+      <button routerLink="/disponibilidad" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-chart-bar text-xs"></i> <span class="d-none d-sm-inline">Disponibilidad</span>
+      </button>
+      <button routerLink="/tareas" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-list-check text-xs"></i> <span class="d-none d-sm-inline">Mis Tareas</span>
+      </button>
+      <button routerLink="/monitorear" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-chart-line text-xs"></i> <span class="d-none d-sm-inline">Monitoreo</span>
+      </button>
+      <button routerLink="/historial" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-history text-xs"></i> <span class="d-none d-sm-inline">Historial</span>
+      </button>
+      <button routerLink="/diccionario" routerLinkActive="nav-btn-active" class="nav-btn">
+        <i class="fas fa-book text-xs"></i> <span class="d-none d-sm-inline">Diccionario</span>
+      </button>
+    </nav>
+    
+    <div class="d-none d-lg-flex align-items-center gap-2">
+      <div class="avatar-circle">JH</div>
+      <div>
+        <span class="fw-bold text-dark d-block small mb-0">Jorge Huamán</span>
+        <span class="text-muted d-block" style="font-size: 0.7rem;">Jefe de Soporte</span>
       </div>
     </div>
   </div>
 </header>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-grow w-full">
+<main class="container py-4 flex-grow-1">
   <router-outlet></router-outlet>
 </main>
 
-<footer class="bg-[#0f172a] text-gray-400 pt-14 pb-8 mt-auto w-full">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-gray-700 pb-10 mb-6">
-      <div>
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
-            <i class="fas fa-laptop-medical text-white text-sm"></i>
+<footer class="bg-dark text-secondary pt-5 pb-4 mt-auto w-full">
+  <div class="container">
+    <div class="row g-4 border-bottom border-secondary pb-4 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <div class="bg-primary text-white rounded p-2 d-flex align-items-center justify-content-center" style="width: 2rem; height: 2rem;">
+            <i class="fas fa-laptop-medical fs-6"></i>
           </div>
-          <span class="font-bold text-white text-lg">Soft<span class="text-blue-500">Corp</span> SSTC</span>
+          <span class="fw-bold text-white fs-5">Soft<span class="text-primary-medium">Corp</span> SSTC</span>
         </div>
-        <p class="text-sm leading-relaxed text-gray-400">
+        <p class="small text-secondary mb-0 leading-relaxed">
           Garantizamos el funcionamiento continuo de tus equipos.<br>
           Centralizamos y agilizamos el soporte técnico para que Soft<br>
           Corporation nunca se detenga.
         </p>
       </div>
-      <div>
-        <h5 class="font-bold text-white mb-4">Navegación</h5>
-        <ul class="space-y-3 text-sm">
-          <li><a routerLink="/landing" class="hover:text-white transition">Inicio</a></li>
-          <li><a routerLink="/diccionario" class="hover:text-white transition">Diccionario de Fallas</a></li>
-          <li><a routerLink="/historial" class="hover:text-white transition">Historial de Equipos</a></li>
+      <div class="col-12 col-md-4">
+        <h6 class="fw-bold text-white mb-3">Navegación</h6>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2 small">
+          <li><a routerLink="/landing" class="footer-nav-link">Inicio</a></li>
+          <li><a routerLink="/diccionario" class="footer-nav-link">Diccionario de Fallas</a></li>
+          <li><a routerLink="/historial" class="footer-nav-link">Historial de Equipos</a></li>
         </ul>
       </div>
-      <div>
-        <h5 class="font-bold text-white mb-4">Contacto</h5>
-        <ul class="space-y-3 text-sm">
-          <li class="flex gap-2 items-center"><i class="fas fa-map-marker-alt text-blue-500 w-4 text-center"></i> Soft Corporation, [Dirección]</li>
-          <li class="flex gap-2 items-center"><i class="fas fa-envelope text-blue-500 w-4 text-center"></i> soporte.sstc@softcorp.com</li>
-          <li class="flex gap-2 items-center"><i class="fas fa-phone-alt text-blue-500 w-4 text-center"></i> Línea directa de soporte</li>
+      <div class="col-12 col-md-4">
+        <h6 class="fw-bold text-white mb-3">Contacto</h6>
+        <ul class="list-unstyled mb-0 d-flex flex-column gap-2 small">
+          <li class="d-flex gap-2 align-items-center"><i class="fas fa-map-marker-alt text-primary-medium w-4 text-center"></i> Soft Corporation, Av. Principal 123</li>
+          <li class="d-flex gap-2 align-items-center"><i class="fas fa-envelope text-primary-medium w-4 text-center"></i> soporte.sstc@softcorp.com</li>
+          <li class="d-flex gap-2 align-items-center"><i class="fas fa-phone-alt text-primary-medium w-4 text-center"></i> Línea directa de soporte</li>
         </ul>
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
-      <p>Soft Corporation © 2026. Todos los derechos reservados.</p>
-      <p>Artefacto Vision v1.0 · ISO 9001 IT</p>
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center small text-muted gap-2">
+      <p class="mb-0">Soft Corporation © 2026. Todos los derechos reservados.</p>
+      <p class="mb-0">Artefacto Vision v1.0 · ISO 9001 IT</p>
     </div>
   </div>
 </footer>

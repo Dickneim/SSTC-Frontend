@@ -10,7 +10,8 @@ import { Incidencia } from '../../model/incidencia.model';
   selector: 'app-informe',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './informe.component.html'
+  templateUrl: './informe.component.html',
+  styleUrl: './informe.component.css'
 })
 export class InformeComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

@@ -1,0 +1,42 @@
+.kpi-card {
+  background-color: #ffffff;
+  border: 1px solid #f1f5f9;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.kpi-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.table th {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.table td {
+  padding: 1rem 0;
+  vertical-align: middle;
+}
+
+.progress {
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: #f1f5f9;
+}
+
+.progress-bar {
+  background-color: var(--success-color);
+  border-radius: 9999px;
+}

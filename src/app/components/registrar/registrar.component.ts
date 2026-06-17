@@ -12,7 +12,8 @@ import { CanalRegistro } from '../../model/incidencia.model';
   selector: 'app-registrar',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './registrar.component.html'
+  templateUrl: './registrar.component.html',
+  styleUrl: './registrar.component.css'
 })
 export class RegistrarComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);

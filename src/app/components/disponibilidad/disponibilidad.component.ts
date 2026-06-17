@@ -7,7 +7,8 @@ import { Tecnico } from '../../model/tecnico.model';
   selector: 'app-disponibilidad',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './disponibilidad.component.html'
+  templateUrl: './disponibilidad.component.html',
+  styleUrl: './disponibilidad.component.css'
 })
 export class DisponibilidadComponent implements OnInit {
   private readonly tecnicoService = inject(TecnicoService);

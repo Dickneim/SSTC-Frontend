@@ -11,7 +11,8 @@ import { Tecnico } from '../../model/tecnico.model';
   selector: 'app-tareas',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterModule],
-  templateUrl: './tareas.component.html'
+  templateUrl: './tareas.component.html',
+  styleUrl: './tareas.component.css'
 })
 export class TareasComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);

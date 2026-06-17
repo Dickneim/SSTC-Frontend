@@ -10,7 +10,8 @@ import { Equipo } from '../../model/equipo.model';
   selector: 'app-historial',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './historial.component.html'
+  templateUrl: './historial.component.html',
+  styleUrl: './historial.component.css'
 })
 export class HistorialComponent implements OnInit {
   private readonly reportesService = inject(ReportesService);
