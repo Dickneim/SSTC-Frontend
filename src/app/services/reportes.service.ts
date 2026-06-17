@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Monitoreo } from '../model/monitoreo.model';
 import { Incidencia } from '../model/incidencia.model';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportesService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/v1/reportes';
+  private readonly apiUrl = `${environment.url}/reportes`;
 
   getMonitoreo(): Observable<Monitoreo> {
     return this.http.get<Monitoreo>(`${this.apiUrl}/monitoreo`);

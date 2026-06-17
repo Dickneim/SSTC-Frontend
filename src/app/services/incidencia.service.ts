@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Incidencia, CanalRegistro } from '../model/incidencia.model';
+import { environment } from '../../environments/environments';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IncidenciaService {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:8080/api/v1/incidencias';
+  private readonly apiUrl = `${environment.url}/incidencias`;
 
   getIncidencias(): Observable<Incidencia[]> {
     return this.http.get<Incidencia[]>(this.apiUrl);
