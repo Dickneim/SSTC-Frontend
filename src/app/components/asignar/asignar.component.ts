@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IncidenciaService } from '../../services/incidencia.service';
@@ -15,6 +15,7 @@ import { Tecnico } from '../../model/tecnico.model';
 export class AsignarComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);
   private readonly tecnicoService = inject(TecnicoService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   incidencias: Incidencia[] = [];
   tecnicos: Tecnico[] = [];
@@ -34,12 +35,16 @@ export class AsignarComponent implements OnInit {
       next: (data) => {
         // filter out already assigned incidents
         this.incidencias = data.filter(inc => !inc.tecnicoAsignado);
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar incidencias:', err)
     });
 
     this.tecnicoService.getTecnicos().subscribe({
-      next: (data) => this.tecnicos = data,
+      next: (data) => {
+        this.tecnicos = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error('Error al cargar técnicos:', err)
     });
   }
@@ -69,10 +74,12 @@ export class AsignarComponent implements OnInit {
         this.selectedIncidenciaId = null;
         this.selectedTecnicoId = null;
         this.cargarDatos();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err?.error?.message || err?.message || 'Error al asignar la incidencia';
         this.mensaje = '';
+        this.cdr.detectChanges();
       }
     });
   }

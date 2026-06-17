@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FallaService } from '../../services/falla.service';
@@ -12,6 +12,7 @@ import { Falla } from '../../model/falla.model';
 })
 export class DiccionarioComponent implements OnInit {
   private readonly fallaService = inject(FallaService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   fallas: Falla[] = [];
   searchText: string = '';
@@ -32,7 +33,10 @@ export class DiccionarioComponent implements OnInit {
 
   cargarFallas(): void {
     this.fallaService.getFallas().subscribe({
-      next: (data) => this.fallas = data,
+      next: (data) => {
+        this.fallas = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error('Error al cargar fallas:', err)
     });
   }
@@ -69,10 +73,12 @@ export class DiccionarioComponent implements OnInit {
           categoria: ''
         };
         this.cargarFallas();
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err?.error?.message || err?.message || 'Error al guardar la falla';
         this.mensaje = '';
+        this.cdr.detectChanges();
       }
     });
   }

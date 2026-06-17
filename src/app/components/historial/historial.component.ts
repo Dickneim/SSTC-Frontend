@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReportesService } from '../../services/reportes.service';
@@ -15,6 +15,7 @@ import { Equipo } from '../../model/equipo.model';
 export class HistorialComponent implements OnInit {
   private readonly reportesService = inject(ReportesService);
   private readonly equipoService = inject(EquipoService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   codigoEquipo: string = 'PC-001';
   historial: Incidencia[] = [];
@@ -32,6 +33,7 @@ export class HistorialComponent implements OnInit {
           this.codigoEquipo = data[0].codigo;
           this.consultarHistorial();
         }
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar equipos:', err)
     });
@@ -55,11 +57,13 @@ export class HistorialComponent implements OnInit {
         } else {
           this.mensaje = '';
         }
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.historial = [];
         this.error = err?.error?.message || err?.message || 'Error al consultar el historial';
         this.mensaje = '';
+        this.cdr.detectChanges();
       }
     });
   }

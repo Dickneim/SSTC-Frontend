@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IncidenciaService } from '../../services/incidencia.service';
@@ -18,6 +18,7 @@ export class RegistrarComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);
   private readonly equipoService = inject(EquipoService);
   private readonly tecnicoService = inject(TecnicoService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   equipos: Equipo[] = [];
   miembros: MiembroArea[] = [];
@@ -40,6 +41,7 @@ export class RegistrarComponent implements OnInit {
         if (data.length > 0) {
           this.nuevaIncidencia.codigoEquipo = data[0].codigo;
         }
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar equipos:', err)
     });
@@ -50,6 +52,7 @@ export class RegistrarComponent implements OnInit {
         if (data.length > 0) {
           this.nuevaIncidencia.registradoPorId = data[0].id;
         }
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar miembros:', err)
     });
@@ -69,10 +72,12 @@ export class RegistrarComponent implements OnInit {
         // Reset form
         this.nuevaIncidencia.problema = '';
         this.nuevaIncidencia.diagnosticoInicial = '';
+        this.cdr.detectChanges();
       },
       error: (err) => {
         this.error = err?.error?.message || err?.message || 'Error al conectar con el servidor';
         this.mensaje = '';
+        this.cdr.detectChanges();
       }
     });
   }

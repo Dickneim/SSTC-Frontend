@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TecnicoService } from '../../services/tecnico.service';
 import { Tecnico } from '../../model/tecnico.model';
@@ -11,12 +11,16 @@ import { Tecnico } from '../../model/tecnico.model';
 })
 export class DisponibilidadComponent implements OnInit {
   private readonly tecnicoService = inject(TecnicoService);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   tecnicos: Tecnico[] = [];
 
   ngOnInit(): void {
     this.tecnicoService.getTecnicos().subscribe({
-      next: (data) => this.tecnicos = data,
+      next: (data) => {
+        this.tecnicos = data;
+        this.cdr.detectChanges();
+      },
       error: (err) => console.error('Error al cargar técnicos:', err)
     });
   }

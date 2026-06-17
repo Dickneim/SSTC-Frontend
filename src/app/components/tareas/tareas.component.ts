@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
@@ -17,6 +17,7 @@ export class TareasComponent implements OnInit {
   private readonly incidenciaService = inject(IncidenciaService);
   private readonly tecnicoService = inject(TecnicoService);
   private readonly router = inject(Router);
+  private readonly cdr = inject(ChangeDetectorRef);
 
   tecnicos: Tecnico[] = [];
   selectedTecnicoId: number = 1;
@@ -35,6 +36,7 @@ export class TareasComponent implements OnInit {
           this.selectedTecnicoId = data[0].id;
           this.cargarTareas();
         }
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar técnicos:', err)
     });
@@ -47,6 +49,7 @@ export class TareasComponent implements OnInit {
         this.tareasPendientes = data.filter(t => t.estado === 'PENDIENTE');
         this.tareasSolucionadas = data.filter(t => t.estado === 'SOLUCIONADO');
         this.selectedTareaId = null;
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error al cargar tareas:', err)
     });

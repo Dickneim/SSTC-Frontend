@@ -1,7 +1,7 @@
 import { Tecnico } from './tecnico.model';
 
 export type EstadoIncidencia = 'PENDIENTE' | 'SOLUCIONADO';
-export type CanalRegistro = 'EMAIL' | 'TELEFONO';
+export type CanalRegistro = 'EMAIL' | 'TELEFONO' | 'WEB';
 
 export interface Incidencia {
   id: number;
